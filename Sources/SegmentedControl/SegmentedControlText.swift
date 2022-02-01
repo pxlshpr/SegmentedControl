@@ -10,6 +10,8 @@ struct SegmentedControlText: View {
     @Binding var isLongPressingSelectedOption: Bool
     @State var selectedTextColor: Color?
     @State var width: CGFloat
+
+    @State var includeDragGesture: Bool
     
     @State var textColor: Color = Color(.label)
     @State var selectorTextColor: Color
@@ -35,7 +37,8 @@ struct SegmentedControlText: View {
          options: Binding<[String]>,
          isLongPressingSelectedOption: Binding<Bool>,
          selectedTextColor: Color? = nil,
-         width: CGFloat
+         width: CGFloat,
+         includeDragGesture: Bool
     ) {
         self._option = State(initialValue: option)
         self._selectedOption = selectedOption
@@ -49,8 +52,11 @@ struct SegmentedControlText: View {
         } else {
             self._selectorTextColor = State(initialValue: Color(.label))
         }
+        
+        self._includeDragGesture = State(initialValue: includeDragGesture)
     }
-    var body: some View {
+    
+    func text(for option: String) -> some View {
         Text(option)
             .font(optionFont)
             .foregroundColor(.white)
@@ -59,7 +65,6 @@ struct SegmentedControlText: View {
             .animation(animation, value: selectedOption)
             .frame(width: width)
             .contentShape(Rectangle())
-            .simultaneousGesture(longPressGesture(for: option))
             .onChange(of: isLongPressing) { newValue in
                 withAnimation {
                     handleLongPress(newValue)
@@ -79,6 +84,15 @@ struct SegmentedControlText: View {
             .onChange(of: colorScheme) { newValue in
                 setTextColor(isLongPressing, newColorScheme: newValue)
             }
+    }
+    var body: some View {
+        if includeDragGesture {
+            text(for: option)
+                .simultaneousGesture(longPressGesture(for: option))
+        } else {
+            text(for: option)
+                .simultaneousGesture(tapGesture(for: option))
+        }
     }
 
     func handleLongPressOnSelection(_ isLongPressingOnSelection: Bool) {

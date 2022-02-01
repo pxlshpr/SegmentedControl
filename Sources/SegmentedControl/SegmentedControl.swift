@@ -17,6 +17,8 @@ public struct SegmentedControl: View {
     @State var selectedTextColor: Color?
     @State var selectedBackgroundColor: Color?
     
+    @State var includeDragGesture: Bool = false
+    
     var backgroundColor: Color {
         Color(.tertiarySystemFill)
     }
@@ -32,23 +34,27 @@ public struct SegmentedControl: View {
     public init(_ selectedOption: Binding<String>,
          options: Binding<[String]>,
          selectedTextColor: Color? = nil,
-         selectedBackgroundColor: Color? = nil)
+         selectedBackgroundColor: Color? = nil,
+        includeDragGesture: Bool = false)
     {
         self._selectedOption = selectedOption
         self._options = options
         self._selectedTextColor = State(initialValue: selectedTextColor)
         self._selectedBackgroundColor = State(initialValue: selectedBackgroundColor)
+        self._includeDragGesture = State(initialValue: includeDragGesture)
     }
     
     public init(_ selectedOption: Binding<String>,
          options: [String],
          selectedTextColor: Color? = nil,
-         selectedBackgroundColor: Color? = nil)
+         selectedBackgroundColor: Color? = nil,
+                includeDragGesture: Bool = false)
     {
         self._selectedOption = selectedOption
         self._options = .constant(options)
         self._selectedTextColor = State(initialValue: selectedTextColor)
         self._selectedBackgroundColor = State(initialValue: selectedBackgroundColor)
+        self._includeDragGesture = State(initialValue: includeDragGesture)
     }
     
     public var body: some View {
@@ -118,7 +124,8 @@ public struct SegmentedControl: View {
                     options: $options,
                     isLongPressingSelectedOption: $isLongPressingSelectedOption,
                     selectedTextColor: selectedTextColor,
-                    width: optionWidth
+                    width: optionWidth,
+                    includeDragGesture: includeDragGesture
                 )
                     .scaleEffect(option == selectedOption ? selectorScale : 1.0, anchor: scaleAnchor)
             }

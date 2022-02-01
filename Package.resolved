@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftHaptics",
+        "repositoryURL": "https://github.com/pxlshpr/SwiftHaptics",
+        "state": {
+          "branch": null,
+          "revision": "6300a8681b551f3df1023266116ca9700dbd14f9",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "SwiftUISugar",
+        "repositoryURL": "https://github.com/pxlshpr/SwiftUISugar",
+        "state": {
+          "branch": null,
+          "revision": "f0817dea47f361277d9c56b4d183face1e3cf127",
+          "version": "0.0.6"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

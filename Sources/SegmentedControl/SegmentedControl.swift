@@ -163,11 +163,13 @@ public struct SegmentedControl: View {
         + (paddingSelectorX * 2.0)
     }
     
+    //TODO: Change how we're adding 25 just to make sure text doesn't get truncated
     var largestWidth: CGFloat {
-        (options.map({ widthForOptionString($0) }).max() ?? 0.0)
-        * selectionScale
+        ((options.map({ widthForOptionString($0) }).max() ?? 0.0)
+        * selectionScale)
+        + 25.0
     }
-    
+
     var optionWidth: CGFloat {
         (paddingSelectorX * 2.0)
         + largestWidth

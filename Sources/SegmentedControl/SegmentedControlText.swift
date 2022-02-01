@@ -113,18 +113,18 @@ struct SegmentedControlText: View {
 //        guard !selectorDraggedOff else {
 //            return
 //        }
-        print("isSelection: \(isSelection), isLongPressing: \(isLongPressing), selectorDraggedOff: \(selectorDraggedOff)")
+//        print("isSelection: \(isSelection), isLongPressing: \(isLongPressing), selectorDraggedOff: \(selectorDraggedOff)")
         if isSelection || (isLongPressing && selectorDraggedOff) {
 //            textColor = colorScheme == .dark ? .white : .black
             textColor = selectorTextColor
-            print("selected: \(option) set to \(selectorTextColor)")
+//            print("selected: \(option) set to \(selectorTextColor)")
         } else if isLongPressing {
-            print("\(option) set to gray")
+//            print("\(option) set to gray")
             textColor = Color(hex: "BEBEBF")
         } else {
 //            textColor = selectorTextColor
             textColor = (newColorScheme ?? colorScheme) == .dark ? .white : .black
-            print("regular: \(option) set to \(textColor)")
+//            print("regular: \(option) set to \(textColor)")
         }
     }
     
